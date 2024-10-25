@@ -7,8 +7,10 @@ import localFont from 'next/font/local'
 import Footer from '@/components/main/Footer'
 import Loader from '@/components/main/Loader'
 import { Loading } from '../../utils/types'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useTheme } from 'next-themes'
+import {dark,shadesOfPurple} from "@clerk/themes";
+import {CookiesProvider} from "react-cookie"
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
     variable: "--font-geist-sans",
@@ -30,28 +32,30 @@ export default function HomeLayout({
     },250)
     const {theme} = useTheme();
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
+    <ClerkProvider appearance={{baseTheme:theme=="dark"?dark:shadesOfPurple}}>
+      <CookiesProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+            >
               <div className={`flex flex-row justify-center items-center fixed top-0 left-0 w-screen h-screen z-50 ${theme=="dark"?"bg-slate-800":"bg-slate-400"}`} style={{
                 clipPath:timer<2?"circle(100% at 50% 50%)":"circle(0% at 50% 50%)",
                 transition:".75s"
               }}>
                 <Loader type={Loading.LOADING}/>
               </div>
-            <Header/>
-            {children}
-            <Footer/>
-          </ThemeProvider>
-        </body>
-      </html>
+              <Header/>
+              {children}
+              <Footer/>
+            </ThemeProvider>
+          </body>
+        </html>
+      </CookiesProvider>
     </ClerkProvider>
   )
 }

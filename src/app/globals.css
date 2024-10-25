@@ -1,7 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: .25s;
+}
+html{
+  scroll-behavior: smooth;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(108, 41, 217);
+  border-radius: 5px;
+}
+*::selection{
+  background-color: rgb(108, 41, 217);
+}
 body {
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
@@ -18,54 +36,56 @@ body {
   }
 }
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.5rem;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 263.4 70% 50.4%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -113,4 +133,192 @@ h1.title span:nth-child(4){
   width: 8px;
   height:8px;
   background-color:#00ff95;
+}
+svg{
+  cursor: pointer;
+}
+.glass_morphism{
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .5);
+}
+/* From Uiverse.io by Nawsome */ 
+/*bg*/
+/*txt*/
+/*success*/
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  top: 20px;
+  left: 20px;
+}
+
+.buttons button {
+  width: 150px;
+  height: 50px;
+  background-color: white;
+  margin: 20px;
+  color: #568fa6;
+  position: relative;
+  overflow: hidden;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.buttons button:before, .buttons button:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #44d8a4;
+  transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.buttons button:before {
+  right: 0;
+  top: 0;
+  transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.buttons button:after {
+  left: 0;
+  bottom: 0;
+}
+
+.buttons button span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.buttons button span:before, .buttons button span:after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 0;
+  background-color: #44d8a4;
+  transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.buttons button span:before {
+  right: 0;
+  top: 0;
+  transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.buttons button span:after {
+  left: 0;
+  bottom: 0;
+}
+
+.buttons button p {
+  padding: 0;
+  margin: 0;
+  transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.buttons button p:before, .buttons button p:after {
+  position: absolute;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+  z-index: 1;
+  left: 0;
+}
+
+.buttons button p:before {
+  content: attr(data-title);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.buttons button p:after {
+  content: attr(data-text);
+  top: 150%;
+  color: #44d8a4;
+}
+
+.buttons button:hover:before, .buttons button:hover:after {
+  width: 100%;
+}
+
+.buttons button:hover span {
+  z-index: 1;
+}
+
+.buttons button:hover span:before, .buttons button:hover span:after {
+  height: 100%;
+}
+
+.buttons button:hover p:before {
+  top: -50%;
+  transform: rotate(5deg);
+}
+
+.buttons button:hover p:after {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.buttons button.start {
+  background-color: #44d8a4;
+  box-shadow: 0px 5px 10px -10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.buttons button.start p:before {
+  top: -50%;
+  transform: rotate(5deg);
+}
+
+.buttons button.start p:after {
+  color: white;
+  transition: all 0s ease;
+  content: attr(data-start);
+  top: 50%;
+  transform: translateY(-50%);
+  animation: start 0.3s ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes start {
+  from {
+    top: -50%;
+  }
+}
+
+.buttons button.start:hover:before, .buttons button.start:hover:after {
+  display: none;
+}
+
+.buttons button.start:hover span {
+  display: none;
+}
+
+.buttons button:active {
+  outline: none;
+  border: none;
+}
+
+.buttons button:focus {
+  outline: 0;
 }

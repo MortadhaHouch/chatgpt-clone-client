@@ -11,20 +11,19 @@ import Robot from "../models/Robot";
 
 export function TextRevealCardPreview() {
   return (
-    <div className="flex items-center justify-center flex-wrap h-full rounded-2xl w-full">
+    <div className="flex items-center justify-center flex-wrap rounded-2xl w-[clamp(300px,40%,400px)] h-auto">
       <TextRevealCard
-        text="You know the business"
-        revealText="I know the chemistry "
+        text="The more you're confident"
+        revealText="The more you're productive"
       >
         <TextRevealCardTitle>
-          Sometimes, you just need to see it.
+          Chatterly
         </TextRevealCardTitle>
         <TextRevealCardDescription>
-          This is a text reveal card. Hover over the card to reveal the hidden
-          text.
+          Sometimes, all you need is an accurate solution to a problem.
         </TextRevealCardDescription>
       </TextRevealCard>
-      <Canvas shadows frameloop="always" className='w-[50%] h-auto'>
+      <Canvas shadows frameloop="always" className='w-[clamp(300px,40%,400px)] h-clamp(300px,40%,400px)'>
           <directionalLight intensity={.75} position={[5, 5, 5]}/>
           <OrbitControls enableZoom={false} enableDamping enablePan enableRotate autoRotate autoRotateSpeed={.75}/>
           <Suspense fallback="loading...">

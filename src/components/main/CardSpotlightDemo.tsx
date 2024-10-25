@@ -3,7 +3,7 @@ import { CardSpotlight } from "../ui/card-spotlight";
 
 export function CardSpotlightDemo({content}:{content:SubscriptionType}) {
   return (
-    <CardSpotlight className="h-96 w-96 flex flex-col justify-between items-center" style={{borderRadius:"15px"}}>
+    <CardSpotlight className="h-[350px] w-[350px] flex flex-col justify-between items-center p-2" style={{borderRadius:"15px"}}>
       <p className="text-xl font-bold relative z-20 mt-2 text-white">
       {content.title}
       </p>
