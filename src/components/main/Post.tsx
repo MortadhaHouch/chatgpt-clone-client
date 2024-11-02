@@ -1,4 +1,3 @@
-import React, { } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
 import { Post as PostType } from '../../../utils/types'

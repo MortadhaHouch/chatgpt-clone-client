@@ -7,8 +7,6 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import React, { } from 'react'
 import { FiSend } from "react-icons/fi";
-import Logo1 from "../../../assets/images/logo-white-removebg-preview.png"
-import Logo2 from "../../../assets/images/logo-black-removebg-preview.png"
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import Image1 from "../../../assets/images/Contact us-cuate.svg";
@@ -58,26 +56,8 @@ export default function ContactUs() {
                     backdropFilter:"blur(10px)"
                 }}>
                 <CardHeader>
-                    <Image src={(theme == "light"||theme == "system")?Logo2:Logo1} alt='logo' height={60} style={{mixBlendMode:"color-burn"}}/>
                     <CardTitle>
-                        <motion.h1 
-                            initial="initialState" 
-                            animate="animateState"
-                            transition={{
-                                type:"spring",
-                                duration:1,
-                            }}
-                            variants={{
-                                initialState:{
-                                    opacity:0,
-                                    y:-100
-                                },
-                                animateState:{
-                                    opacity:1,
-                                    y:0
-                                }
-                            }}
-                            className="text-2xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto ">Get in touch with us</motion.h1>
+                        Get in touch with us
                     </CardTitle>
                 </CardHeader>
                 <CardBody className='w-full h-auto flex flex-col justify-center items-center gap-3'>

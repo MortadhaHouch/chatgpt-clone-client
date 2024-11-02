@@ -5,10 +5,7 @@ import { BentoCard, BentoGrid } from "../ui/bento-grid";
 import Marquee from "../ui/marquee";
 import { AnimatedListDemo } from "./AnimatedListDemo";
 import { AnimatedBeamMultipleOutputDemo } from "./AnimatedBeamDemo";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { Suspense } from "react";
-import Earth from "../models/Earth";
+import Globe from "../models/Globe";
 const messages = [
   {
     name: "Customer Support",
@@ -98,13 +95,7 @@ const features = [
     href: "#",
     cta: "Learn more",
     background: (
-      <Canvas style={{width:"clamp(300px,30%,450px)",height:"clamp(300px,30%,450px)"}}>
-        <OrbitControls enableDamping enablePan enableRotate autoRotate autoRotateSpeed={.75} enableZoom={false}/>
-        <ambientLight intensity={.75}/>
-        <Suspense fallback="loading...">
-          <Earth/>
-        </Suspense>
-      </Canvas>
+      <Globe/>
     ),
   },
 ];

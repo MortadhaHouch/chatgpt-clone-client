@@ -6,7 +6,8 @@ type SubscriptionType = {
 enum Loading {
     ERROR="ERROR",
     LOGIN="LOGIN",
-    LOADING="LOADING"
+    LOADING="LOADING",
+    MESSAGE_LOADING = "MESSAGE_LOADING"
 }
 enum TabType {
     HOME,

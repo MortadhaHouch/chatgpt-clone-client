@@ -1,20 +1,21 @@
 import { Method } from "./types";
-export default async function fetchData(url:string,method:string,body:object,auth:string|null,setIsLoading:React.Dispatch<React.SetStateAction<boolean>>){
+export default async function fetchData(url:string,method:string,body:object|null,auth:string|null,setIsLoading:React.Dispatch<React.SetStateAction<boolean>>){
+    setIsLoading(true);
     try {
         let requestBody:string|null = null;
         switch (method) {
             case Method.GET:
             case Method.DELETE:
-                requestBody = JSON.stringify(body);
-                break;
-            case Method.POST:
-            case Method.PUT:
                 requestBody = null;
+                break;
+                case Method.POST:
+                case Method.PUT:
+                requestBody = JSON.stringify(body);
                 break;
             default:
                 break;
         }
-        const request = await fetch(url,{
+        const request = await fetch(process.env.NEXT_PUBLIC_REQUEST_URL+url,{
             method,
             body:requestBody,
             headers:{
@@ -22,7 +23,6 @@ export default async function fetchData(url:string,method:string,body:object,aut
                 "Authorization":`Bearer ${auth}`
             }
         })
-        setIsLoading(true);
         const response = await request.json();
         return response;
     } catch (error) {

@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-"use client"
 import { BackgroundBeamsWithCollisionDemo } from '@/components/main/BackgroundBeamsWithCollisionDemo'
 import { HeroHighlightDemo } from '@/components/main/HeroHighlightDemo'
 import { ThreeDCardDemo } from '@/components/main/ThreeDCardDemo'
-import React, { useState } from 'react'
 import chat_ui from "../../../assets/images/chat_ui.jpeg"
 import mobile_chat_ui from "../../../assets/images/mobile_chat_ui.jpeg"
 import pc_mobile_mockup from "../../../assets/images/pc_mobile_mockup.png"
 import { TextRevealCardPreview } from '@/components/main/TextRevealCardPreview'
 import Draggable from '@/components/main/Draggable'
-export default function Home() {
-  const [images,setImages] = useState<unknown[]>([chat_ui,mobile_chat_ui,pc_mobile_mockup]);
+export function Home() {
+  const images =[chat_ui,mobile_chat_ui,pc_mobile_mockup];
   return (
     <main className='w-full h-auto flex flex-col justify-center items-center'>
       <section className='w-full h-screen flex flex-row justify-center items-center flex-wrap pt-28'>

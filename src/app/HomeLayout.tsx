@@ -4,13 +4,12 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { ThemeProvider } from './providers/theme-provider'
 import Header from '@/components/main/Header'
 import localFont from 'next/font/local'
-import Footer from '@/components/main/Footer'
-import Loader from '@/components/main/Loader'
+// import Footer from '@/components/main/Footer'
+import dynamic from 'next/dynamic'
+const Loader = dynamic(() => import("../components/main/Loader"), { ssr: false });
 import { Loading } from '../../utils/types'
-import React, { useState } from 'react'
-import { useTheme } from 'next-themes'
-import {dark,shadesOfPurple} from "@clerk/themes";
 import {CookiesProvider} from "react-cookie"
+import {motion} from "framer-motion"
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
     variable: "--font-geist-sans",
@@ -26,13 +25,8 @@ export default function HomeLayout({
   }: Readonly<{
     children: React.ReactNode;
   }>) {
-    const [timer,setTimer] = useState(0);
-    setInterval(()=>{
-      setTimer(prev=>prev+=0.25);
-    },250)
-    const {theme} = useTheme();
   return (
-    <ClerkProvider appearance={{baseTheme:theme=="dark"?dark:shadesOfPurple}}>
+    <ClerkProvider>
       <CookiesProvider>
         <html lang="en">
           <body
@@ -43,15 +37,28 @@ export default function HomeLayout({
               defaultTheme="system"
               enableSystem
             >
-              <div className={`flex flex-row justify-center items-center fixed top-0 left-0 w-screen h-screen z-50 ${theme=="dark"?"bg-slate-800":"bg-slate-400"}`} style={{
-                clipPath:timer<2?"circle(100% at 50% 50%)":"circle(0% at 50% 50%)",
-                transition:".75s"
-              }}>
+              <motion.section 
+                animate="animate" 
+                initial="initial"
+                variants={{
+                  initial:{
+                    clipPath:"circle(100% at 50% 50%)",
+                  },
+                  animate:{
+                    clipPath:"circle(0% at 50% 50%)",
+                  }
+                }}
+                className='fixed top-0 left-0 w-[100vw] h-[100vh] z-50 bg-slate-500'
+                transition={{
+                  duration: 1.5,
+                  ease: "easeInOut",
+                  type: "tween"
+                }}>
                 <Loader type={Loading.LOADING}/>
-              </div>
+              </motion.section>
               <Header/>
               {children}
-              <Footer/>
+              {/* <Footer/> */}
             </ThemeProvider>
           </body>
         </html>

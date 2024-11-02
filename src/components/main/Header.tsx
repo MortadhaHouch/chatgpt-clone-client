@@ -14,7 +14,9 @@ import { FaQuestion } from "react-icons/fa";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import {motion} from "framer-motion"
 import { MdOutlineConnectWithoutContact } from "react-icons/md";
+import {SignOutButton, useAuth, UserButton} from "@clerk/nextjs"
 export default function Header() {
+    const {isSignedIn} = useAuth();
     const {theme} = useTheme();
     return (
         <motion.header
@@ -62,18 +64,31 @@ export default function Header() {
                         Contact us
                     </Link>
                 </Button>
-                <Button>
-                    <Link href={"/dashboard"} className='flex flex-row justify-center items-center'>
-                        <MdOutlineDashboardCustomize/>
-                        dashboard
-                    </Link>
-                </Button>
-                <Button>
-                    <Link href={"/login"} className='flex flex-row justify-center items-center'>
-                        <IoMdLogIn/>
-                        login
-                    </Link>
-                </Button>
+                {
+                    isSignedIn?(
+                        <>
+                            <Button>
+                                <Link href={"/dashboard"} className='flex flex-row justify-center items-center'>
+                                    <MdOutlineDashboardCustomize/>
+                                    dashboard
+                                </Link>
+                            </Button>
+                            <Button>
+                                <UserButton/>
+                            </Button>
+                            <Button>
+                                <SignOutButton redirectUrl='/home'/>
+                            </Button>
+                        </>
+                    ):(
+                        <Button>
+                            <Link href={"/login"} className='flex flex-row justify-center items-center'>
+                                <IoMdLogIn/>
+                                login
+                            </Link>
+                        </Button>
+                    )
+                }
             </div>
             <ModeToggle/>
         </motion.header>
