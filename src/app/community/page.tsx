@@ -9,6 +9,7 @@ import {motion} from "framer-motion"
 import { Dialog } from '@/components/main/DialogDemo'
 import Post from '@/components/main/Post'
 import { FaHome, FaSearch } from 'react-icons/fa';
+import { Action } from '../../../utils/types';
 export default function Community() {
   const [isOpen,setIsOpen] = useState<boolean>(false);
   const {theme} = useTheme();
@@ -38,7 +39,7 @@ export default function Community() {
         <CgProfile size={40} color={theme=="dark"?"rgba(255,255,255,.25)":"black"}/>
         <LuActivitySquare size={40} color={theme=="dark"?"rgba(255,255,255,.25)":"black"}/>
       </motion.div>
-      <Dialog open={isOpen} setIsOpen={setIsOpen}/>
+      <Dialog action={Action.CREATE_POST} open={isOpen} setIsOpen={setIsOpen}/>
       {
         posts.map((item,index)=>{
           return (

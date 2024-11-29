@@ -1,5 +1,4 @@
 "use client"
-import Sidebar from '@/components/main/Sidebar'
 import { useEffect, useState } from 'react'
 import { Tilt } from 'react-tilt'
 import Image from 'next/image'
@@ -14,12 +13,12 @@ import { useTheme } from 'next-themes'
 import { SignIn, useUser } from '@clerk/nextjs'
 import Loader from '@/components/main/Loader'
 import fetchData from '../../../../utils/fetchData'
-import { DashboardComponentType, Loading, TabType } from '../../../../utils/types'
+import { DashboardComponentType, Loading } from '../../../../utils/types'
+import { AppSidebar } from '@/components/main/app-sidebar'
 export default function Dashboard(){
     const {user} = useUser();
-    const [tab,setTab] = useState<TabType>(TabType.HOME);
     const {theme} = useTheme();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     async function handleDataLoading(id:string){
         try {
             const request = await fetchData("/user/preview","GET",null,id,setLoading);
@@ -65,7 +64,7 @@ export default function Dashboard(){
         ]
         return (
             <main className='w-full min-h-screen flex flex-col justify-start items-center flex-wrap relative'>
-                <Sidebar tab={tab} setTab={setTab}/>
+                <AppSidebar/>
                 <section className='flex flex-row justify-center items-center flex-wrap gap-2 p-2 absolute pt-28 pb-10'>
                     <div className='flex flex-row justify-center items-center flex-wrap gap-2 p-2'>
                         {dashboardComponents.map((item,index)=>{

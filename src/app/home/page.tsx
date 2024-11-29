@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+"use client"
 import { BackgroundBeamsWithCollisionDemo } from '@/components/main/BackgroundBeamsWithCollisionDemo'
 import { HeroHighlightDemo } from '@/components/main/HeroHighlightDemo'
 import { ThreeDCardDemo } from '@/components/main/ThreeDCardDemo'
@@ -7,13 +8,11 @@ import mobile_chat_ui from "../../../assets/images/mobile_chat_ui.jpeg"
 import pc_mobile_mockup from "../../../assets/images/pc_mobile_mockup.png"
 import { TextRevealCardPreview } from '@/components/main/TextRevealCardPreview'
 import Draggable from '@/components/main/Draggable'
-export function Home() {
+export default function HomePage() {
   const images =[chat_ui,mobile_chat_ui,pc_mobile_mockup];
   return (
-    <main className='w-full h-auto flex flex-col justify-center items-center'>
-      <section className='w-full h-screen flex flex-row justify-center items-center flex-wrap pt-28'>
-        <TextRevealCardPreview/>
-      </section>
+    <main className='w-screen h-auto flex flex-col justify-center items-center'>
+      <TextRevealCardPreview/>
       <section className='w-full h-auto flex flex-col justify-center items-center flex-wrap gap-1 p-2'>
         <Draggable>
           <h1

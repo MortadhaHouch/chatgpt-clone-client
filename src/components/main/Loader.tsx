@@ -1,3 +1,4 @@
+"use client"
 import { Loading } from "../../../utils/types";
 import LottieReact from "lottie-react"
 import error from "../../../assets/animations/Animation - error.json"

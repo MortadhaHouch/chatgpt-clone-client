@@ -11,7 +11,7 @@ import Robot from "../models/Robot";
 
 export function TextRevealCardPreview() {
   return (
-    <div className="flex items-center justify-center flex-wrap rounded-2xl w-[clamp(300px,40%,400px)] h-auto">
+    <section className="flex items-center justify-center flex-wrap rounded-2xl w-full h-auto pt-28">
       <TextRevealCard
         text="The more you're confident"
         revealText="The more you're productive"
@@ -23,13 +23,14 @@ export function TextRevealCardPreview() {
           Sometimes, all you need is an accurate solution to a problem.
         </TextRevealCardDescription>
       </TextRevealCard>
-      <Canvas shadows frameloop="always" className='w-[clamp(300px,40%,400px)] h-clamp(300px,40%,400px)'>
+        <Canvas shadows frameloop="always" className='w-[clamp(300px,50%,400px)]' style={{height:"300px !important"}}>
           <directionalLight intensity={.75} position={[5, 5, 5]}/>
+          <ambientLight intensity={.45}/>
           <OrbitControls enableZoom={false} enableDamping enablePan enableRotate autoRotate autoRotateSpeed={.75}/>
           <Suspense fallback="loading...">
             <Robot/>
           </Suspense>
         </Canvas>
-    </div>
+    </section>
   );
 }

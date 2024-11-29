@@ -1,8 +1,8 @@
 import React from "react";
 
-function CreateIcon() {
+function CreateIcon({size}:{size?:number}) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+    <svg xmlns="http://www.w3.org/2000/svg" width={size||500} viewBox="0 0 500 500">
       <g>
         <path fill="#ebebeb" d="M0 382.4H500V382.65H0z"></path>
         <path

@@ -1,9 +1,11 @@
 "use client"
-import { ChevronUp, Home, Inbox, MoreHorizontal, Settings, User2 } from "lucide-react"
+import { ChevronUp, Home, Inbox, MoreHorizontal, Settings, User2,Trash2 } from "lucide-react"
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import {
     Sidebar,
     SidebarContent,
+    SidebarContext,
+    SidebarContextType,
     SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
@@ -12,6 +14,7 @@ import {
     SidebarMenuAction,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
@@ -24,6 +27,7 @@ import Desktop from "../icons/Desktop"
 import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
 import {SignOutButton, useAuth,useUser} from "@clerk/nextjs"
+import { useContext } from "react";
 const items = [
     {
         title: "Home",
@@ -67,26 +71,29 @@ const items = [
         tab:TabType.SETTINGS,
         link:"/settings"
     },
+    {
+        title: "Bin",
+        url: "#",
+        icon: Trash2,
+        tab:TabType.BIN,
+        link:"/bin"
+    },
 ]
-export function AppSidebar({
-    setTab,
-    tab
-}:{
-    setTab:React.Dispatch<React.SetStateAction<TabType>>,
-    tab:TabType
-}) {
+export function AppSidebar() {
     const {theme} = useTheme();
     const {isSignedIn} = useAuth();
     const {user} = useUser();
+    const tabContext = useContext<SidebarContextType>(SidebarContext);
     if(isSignedIn){
         return (
-            <Sidebar className={`z-30 ${theme=="dark"?"bg-slate-900":"bg-slate-200"}`} collapsible="icon">
+            <SidebarProvider tab={tabContext.tab} setTab={tabContext.setTab}>
+                <Sidebar className={`z-30 ${theme=="dark"?"bg-slate-900":"bg-slate-200"}`} collapsible="icon">
                 <SidebarTrigger/>
                 <SidebarContent>
                     <SidebarHeader className="flex flex-row justify-start items-center p-2 gap-2">
                         {
                             user?.hasImage?(
-                                <Image src={user?.imageUrl} style={{borderRadius:"50%"}} width={50} height={50} alt="avatar"/>
+                                <Image src={user?.imageUrl} priority style={{borderRadius:"50%"}} width={50} height={50} alt="avatar"/>
                             ):(
                                 <span style={{borderRadius:"50%"}}>{user?.firstName && user?.firstName[0]}{user?.lastName && user?.lastName[0]}</span>
                             )
@@ -102,17 +109,20 @@ export function AppSidebar({
                             <SidebarMenuItem 
                                 key={index} 
                                 style={{
-                                    backgroundColor:item.tab == tab?theme=="dark"?"#002d":"#EBD3F8":"",
-                                    paddingLeft:item.tab == tab?"15px":0,
-                                    borderLeft:item.tab == tab?"3px solid #629eff":"none",
-                                    transition:".5s"
+                                    backgroundColor:localStorage.getItem("tab") == item.tab?theme=="dark"?"#002d":"#EBD3F8":"",
+                                    paddingLeft:localStorage.getItem("tab") == item.tab?"15px":0,
+                                    borderLeft:localStorage.getItem("tab") == item.tab?"3px solid #629eff":"none",
+                                    transition:"border-left .5s, padding-left .5s, background-color .5s"
                                 }}
                                 onClick={()=>{
-                                    setTab(item.tab)
+                                    tabContext?.setTab(item.tab);
+                                    localStorage.setItem("tab", item.tab);
                                 }}
                             >
                                 <SidebarMenuButton asChild>
-                                <Link href={"/dashboard"+item.link}>
+                                <Link href={"/dashboard"+item.link} onClick={()=>{
+                                    tabContext?.setTab(item.tab);
+                                }}>
                                     <item.icon scale={1.1}/>
                                     <span className="text-lg">{item.title}</span>
                                 </Link>
@@ -197,6 +207,7 @@ export function AppSidebar({
                 </SidebarMenu>
                 </SidebarFooter>
             </Sidebar>
+            </SidebarProvider>
         )
     }else{
         return <></>

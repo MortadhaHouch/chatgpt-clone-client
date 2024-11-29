@@ -7,7 +7,7 @@ import Logo2 from "../../../assets/images/logo-black-removebg-preview.png"
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { Button } from '../ui/button';
-import { IoMdLogIn } from "react-icons/io";
+import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
 import { FaMagic } from "react-icons/fa";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { FaQuestion } from "react-icons/fa";
@@ -76,9 +76,10 @@ export default function Header() {
                             <Button>
                                 <UserButton/>
                             </Button>
-                            <Button>
+                            <div className='flex flex-row justify-center items-center gap-1 bg-red-600 px-1 py-[6px] rounded-md'>
                                 <SignOutButton redirectUrl='/home'/>
-                            </Button>
+                                <IoMdLogOut />
+                            </div>
                         </>
                     ):(
                         <Button>

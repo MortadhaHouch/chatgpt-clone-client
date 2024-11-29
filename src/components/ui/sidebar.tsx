@@ -18,6 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { TabType } from "../../../utils/types"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -26,17 +27,31 @@ const SIDEBAR_WIDTH_MOBILE = "18rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
-type SidebarContext = {
+export type SidebarContextType = {
   state: "expanded" | "collapsed"
   open: boolean
   setOpen: (open: boolean) => void
   openMobile: boolean
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
-  toggleSidebar: () => void
+  toggleSidebar: () => void,
+  tab:TabType,
+  setTab:React.Dispatch<React.SetStateAction<TabType>>
 }
 
-const SidebarContext = React.createContext<SidebarContext | null>(null)
+export const SidebarContext = React.createContext<SidebarContextType>(
+  {
+    state: "expanded",
+    open: false,
+    setOpen: () => {},
+    openMobile: false,
+    setOpenMobile: () => {},
+    isMobile: false,
+    toggleSidebar: () => {},
+    tab: TabType.HOME,
+    setTab: () => {},
+  }
+)
 
 function useSidebar() {
   const context = React.useContext(SidebarContext)
@@ -52,7 +67,9 @@ const SidebarProvider = React.forwardRef<
   React.ComponentProps<"div"> & {
     defaultOpen?: boolean
     open?: boolean
-    onOpenChange?: (open: boolean) => void
+    onOpenChange?: (open: boolean) => void,
+    tab:TabType,
+    setTab:React.Dispatch<React.SetStateAction<TabType>>
   }
 >(
   (
@@ -63,6 +80,8 @@ const SidebarProvider = React.forwardRef<
       className,
       style,
       children,
+      tab,
+      setTab,
       ...props
     },
     ref
@@ -117,7 +136,7 @@ const SidebarProvider = React.forwardRef<
     // This makes it easier to style the sidebar with Tailwind classes.
     const state = open ? "expanded" : "collapsed"
 
-    const contextValue = React.useMemo<SidebarContext>(
+    const contextValue = React.useMemo<SidebarContextType>(
       () => ({
         state,
         open,
@@ -126,8 +145,10 @@ const SidebarProvider = React.forwardRef<
         openMobile,
         setOpenMobile,
         toggleSidebar,
+        tab,
+        setTab
       }),
-      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar,tab,setTab]
     )
 
     return (
